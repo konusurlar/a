@@ -543,4 +543,11 @@ def main():
     print("-----------------------------------------------------------")
     min_id, max_id = get_date_range() 
     os.system('cls' if os.name == 'nt' else 'clear')
-    os.system('cls' if os.name == 'n
+    gtokens()
+    os.system('cls' if os.name == 'nt' else 'clear')
+    Thread(target=ustats, daemon=True).start()
+    for _ in range(250):
+        Thread(target=sinsta, args=(min_id, max_id)).start()
+
+if __name__ == "__main__":
+    main()
