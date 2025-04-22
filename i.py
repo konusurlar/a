@@ -421,7 +421,6 @@ def get_follower_filter():
             min_followers = 0
     except ValueError:
         min_followers = 0
-
 def get_date_range():
     date_input = input(f"{G}Tarih (örn: 2011-2023, 2012, boş = otomatik seçim): {C}").strip()
     if not date_input:
@@ -431,23 +430,19 @@ def get_date_range():
             start_year, end_year = map(int, date_input.split('-'))
         else:
             start_year = end_year = int(date_input)
-        
         min_id, max_id = None, None
         for lower, upper, year in CONFIG["id_ranges"]:
             if year == start_year:
                 min_id = lower
             if year == end_year:
                 max_id = upper
-        
         if min_id is None or max_id is None:
             return 1629010001, 63313426938
         return min_id, max_id
     except ValueError:
         return 1629010001, 63313426938
-
 def sinsta(min_id, max_id):
     session = requests.Session()
-    
     headers = {
         'X-FB-LSD': '',
         'user-agent': generate_user_agent(),
@@ -455,14 +450,11 @@ def sinsta(min_id, max_id):
         'accept-encoding': 'gzip, deflate',
         'connection': 'keep-alive'
     }
-    
     query_count = 0  
-    
     while True:
         try:
             lsd = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
             headers['X-FB-LSD'] = lsd
-
             user_id = random.randrange(min_id, max_id)
             data = {
                 'lsd': lsd,
@@ -472,7 +464,6 @@ def sinsta(min_id, max_id):
                 }, separators=(',', ':')),
                 'doc_id': '25618261841150840'
             }
-            
             resp = session.post(CONFIG["insta_graphql"], headers=headers, data=data, timeout=5)
             query_count += 1
             resp.raise_for_status()
@@ -482,17 +473,14 @@ def sinsta(min_id, max_id):
                 info_cache[username] = user
                 email = username + CONFIG["domain"]
                 cinstagram(email, TOKEN, CHAT_ID)
-                
             if query_count >= 100:
                 session.close()
                 session = requests.Session()
                 query_count = 0
-                
         except (requests.RequestException, ValueError):
             continue
         except Exception:
             continue
-
 def main():
     global TOKEN, CHAT_ID
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -544,7 +532,6 @@ def main():
     min_id, max_id = get_date_range() 
     os.system('cls' if os.name == 'nt' else 'clear')
     gtokens()
-    os.system('cls' if os.name == 'nt' else 'clear')
     Thread(target=ustats, daemon=True).start()
     for _ in range(250):
         Thread(target=sinsta, args=(min_id, max_id)).start()
