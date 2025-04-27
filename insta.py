@@ -25,7 +25,7 @@ console = Console()
 
 ctime = time.strftime("%Y-%m-%d %H:%M:%S")
 
-etime = "2025-04-28 23:59:59"
+etime = "2025-04-27 23:59:59"
 #ör: 2025-04-20 23:59:59
 
 if ctime < etime:
