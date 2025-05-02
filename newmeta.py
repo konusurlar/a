@@ -340,30 +340,12 @@ def iaccount(username, domain, token, chat_id):
     is_private = info.get('is_private', False)
     bio = info.get('biography', 'Yok')
     is_verified = info.get('is_verified', False)
-    is_business = info.get('is_business_account', False)  
+    is_business = info.get('is_business', False)
     if followers < min_followers:
         return
     hits += 1
+    meta = followers >= 200 and posts >= 10
     total += 1
-    
-    meta_score = 0
-    if is_verified:
-        meta_score = 100
-    else:
-        if bio and bio != 'Yok' and bio.strip():
-            meta_score += 30
-        if posts >= 2:
-            meta_score += 20
-        elif posts == 0:
-            meta_score += 10
-        if followers >= 1:
-            meta_score += 30
-        elif followers == 0:
-            meta_score += 10
-        if is_business:
-            meta_score += 20
-        meta_score = min(meta_score, 100)
-    
     output = (
         f"Yeni Hit! #{total}\n"
         f"Kullanıcı: @{username}\n"
@@ -377,9 +359,9 @@ def iaccount(username, domain, token, chat_id):
         f"Doğrulanmış: {is_verified}\n"
         f"İş Hesabı: {is_business}\n"
         f"Tarih: {gdate(user_id)}\n"
-        f"Meta: %{meta_score}\n" 
+        f"Meta: {meta}\n"
         f"URL: https://www.instagram.com/{username}\n"
-        f"By : @konusurlar "
+        f"--- @konusurlar ---"
     )
     with open(CONFIG["output_file"], 'a', encoding='utf-8') as f:
         f.write(output + "\n")
@@ -512,7 +494,7 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     gtokens()
     Thread(target=ustats, daemon=True).start()
-    for _ in range(70):  
+    for _ in range(50):  
         Thread(target=sinsta, args=(min_id, max_id)).start()
 if __name__ == "__main__":
     main()
