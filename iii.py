@@ -23,7 +23,7 @@ import urllib.parse
 init(autoreset=True)
 console = Console()
 ctime = time.strftime("%Y-%m-%d %H:%M:%S")
-etime = "2025-05-01 23:59:59"
+etime = "2025-05-02 23:59:59"
 if ctime < etime:
     pass
 else:
