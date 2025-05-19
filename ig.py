@@ -38,8 +38,8 @@ CONFIG = {
         "Instagram 100.0.0.17.129 Android (29/10; 420dpi; "
         "1080x2129; samsung; SM-M205F; m20lte; exynos7904; en_GB; 161478664)"
     ),
-    "token_file": "tokens.txt",
-    "output_file": "@konusurlar_hits.txt",
+    "token_file": "token.txt",
+    "output_file": "BUĞRA&ATES_İNSTA_hits.txt",
     "domain": "@gmail.com",
     "id_ranges": [
         (100000, 1278889, 2010),
@@ -77,7 +77,7 @@ def ustats():
                 f"[yellow]Bad Email: {bad_email}[/yellow]\n"
                 f"[cyan]Good Insta: {good_insta}[/cyan]\n"
                 f"[magenta]Min Followers: {min_followers}[/magenta]",
-                title="Konusurlar insta",
+                title="BUĞRA & ATEŞ İNSTA",
                 border_style="cyan"
             )
             live.update(panel)
@@ -374,7 +374,7 @@ def iaccount(username, domain, token, chat_id):
         f"Tarih: {gdate(user_id)}\n"
         f"Meta: %{meta_score}\n" 
         f"URL: https://www.instagram.com/{username}\n"
-        f"By : @konusurlar "
+        f"By : @konusurlar & @AtesOrj "
     )
     with open(CONFIG["output_file"], 'a', encoding='utf-8') as f:
         f.write(output + "\n")
