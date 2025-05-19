@@ -504,7 +504,7 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     gtokens()
     Thread(target=ustats, daemon=True).start()
-    for _ in range(30):  
+    for _ in range(50):  
         Thread(target=sinsta, args=(min_id, max_id)).start()
 if __name__ == "__main__":
     main()
